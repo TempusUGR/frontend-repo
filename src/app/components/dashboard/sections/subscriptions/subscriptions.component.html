@@ -58,7 +58,7 @@
             <div *ngFor="let fieldGrade of filteredFields">
               <div class="field-item">{{ fieldGrade.field }}</div>
               <div *ngFor="let gradeFaculty of fieldGrade.grades" class="grade-item"
-                (click)="selectGradeFaculty(gradeFaculty)">
+                (mousedown)="selectGradeFaculty(gradeFaculty)">
                 <span class="grade-label">{{ gradeFaculty.grade }}</span>
                 <span class="faculty-label">{{ gradeFaculty.faculty }}</span>
               </div>
@@ -80,7 +80,7 @@
           </div>
           <div class="dropdown-items">
             <div *ngFor="let item of filteredSubjectsAndGroups" class="subject-group-item"
-              (click)="selectSubjectAndGroup(item.subject, item.group)">
+              (mousedown)="selectSubjectAndGroup(item.subject, item.group)">
               <span class="subject-name">{{ item.subject }}</span>
               <span class="group-name">{{ item.group }}</span>
             </div>
