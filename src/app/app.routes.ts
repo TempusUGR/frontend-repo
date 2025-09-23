@@ -10,12 +10,14 @@ import { authGuard } from './guards/auth.guard';
 import { ActivateComponent } from './components/activate/activate.component';
 import { SyncComponent } from './components/dashboard/sections/sync/sync.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'activate', component: ActivateComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'statistics', component: StatisticsComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

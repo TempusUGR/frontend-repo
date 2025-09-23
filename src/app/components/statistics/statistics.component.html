@@ -1,0 +1,103 @@
+<div class="flex flex-col items-center min-h-screen bg-[var(--background-color)] py-6">
+
+  <div class="flex flex-col items-center mt-4 mb-8">
+    <img src="assets/logo.png" alt="TempusUGR Logo"
+      class="mt-2 w-20 h-auto mx-auto block transition-transform duration-200 hover:scale-110 cursor-pointer"
+      (click)="goToLogin()" />
+    <span class="text-2xl font-bold text-[var(--primary-color)] mt-2 tracking-wide">TempusUGR <span
+        class="font-normal">Estadísticas</span></span>
+  </div>
+
+  <div class="card flex flex-col items-center mb-8 w-full max-w-2xl">
+    <h2 class="text-xl font-bold mb-4 text-[var(--primary-color)]">Usuarios registrados</h2>
+    <div class="flex flex-row gap-8 items-center justify-center">
+      <div class="flex flex-col items-center">
+        <img src="assets/teacher.png" alt="Profesores" class="w-24 h-24 mb-2" />
+        <span class="font-semibold text-lg">{{ registrations?.teacher ?? '-' }}</span>
+        <span class="text-m text-gray-800">Profesores</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="assets/student.png" alt="Estudiantes" class="w-24 h-24 mb-2" />
+        <span class="font-semibold text-lg">{{ registrations?.student ?? '-' }}</span>
+        <span class="text-m text-gray-800">Estudiantes</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card flex flex-col items-center mb-8 w-full max-w-2xl">
+    <h2 class="text-lg font-bold mb-4 text-[var(--primary-color)]">Histórico de registros</h2>
+    <div class="flex gap-4 mb-4">
+      <select class="form-input w-auto" [(ngModel)]="selectedYear" (change)="loadRegistrationsByYear()">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+    <div class="w-full">
+      <canvas id="registrationsChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card flex flex-col items-center mb-8 w-full max-w-2xl">
+    <h2 class="text-lg font-bold mb-4 text-[var(--primary-color)]">Logins por mes</h2>
+    <div class="flex gap-4 mb-4">
+      <select class="form-input w-auto" [(ngModel)]="selectedLoginMonth" (change)="loadLoginsByMonth()">
+        <option *ngFor="let m of months" [value]="m">{{ m | titlecase }}</option>
+      </select>
+      <select class="form-input w-auto" [(ngModel)]="selectedLoginYear" (change)="loadLoginsByMonth()">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+    <div class="w-full mb-8">
+      <canvas id="loginsChart"></canvas>
+    </div>
+
+    <h2 class="text-lg font-bold mb-4 text-[var(--primary-color)]">Logins por año</h2>
+    <div class="flex gap-4 mb-4">
+      <select class="form-input w-auto" [(ngModel)]="selectedLoginYearForYear" (change)="loadLoginsByYear()">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+    <div class="w-full">
+      <canvas id="loginsYearChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card flex flex-col items-center mb-8 w-full max-w-2xl">
+    <h2 class="text-lg font-bold mb-4 text-[var(--primary-color)]">Descargas ICS por mes</h2>
+    <div class="flex gap-4 mb-4">
+      <select class="form-input w-auto" [(ngModel)]="selectedIcsMonth" (change)="loadIcsDownloadsByMonth()">
+        <option *ngFor="let m of months" [value]="m">{{ m | titlecase }}</option>
+      </select>
+      <select class="form-input w-auto" [(ngModel)]="selectedIcsYear" (change)="loadIcsDownloadsByMonth()">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+    <div class="w-full mb-8">
+      <canvas id="icsDownloadsChart"></canvas>
+    </div>
+
+    <h2 class="text-lg font-bold mb-4 text-[var(--primary-color)]">Descargas ICS por año</h2>
+    <div class="flex gap-4 mb-4">
+      <select class="form-input w-auto" [(ngModel)]="selectedIcsYearForYear" (change)="loadIcsDownloadsByYear()">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+    <div class="w-full">
+      <canvas id="icsDownloadsYearChart"></canvas>
+    </div>
+  </div>
+
+  <button
+  class="fixed bottom-6 right-6 z-50 bg-[var(--primary-color)] text-white rounded-full shadow-lg p-4 flex items-center gap-2 hover:bg-[var(--secondary-color)] transition-colors"
+  (click)="downloadPdfReport()"
+  title="Descargar reporte PDF"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M12 16v-8m0 8l-4-4m4 4l4-4M4 20h16a2 2 0 002-2V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+  <span class="hidden md:inline">PDF</span>
+</button>
+
+</div>
+
+
